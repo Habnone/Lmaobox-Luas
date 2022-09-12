@@ -1,9 +1,17 @@
 
 -- Priority's if you have them set as a diffrent priority
-local CheatersPriority = 10;
-local TryhardPriority = 5;
-local AnnoyingPriority = 3;
-local FriendsPriority = -1;
+local FirstPriority = 10;
+local SecondPriority = 7;
+local ThirdPriority = 5;
+local FourthPriority = 3;
+local FifthPriority = -1;
+
+-- Names for diffrent prioritys
+local FirstTag = "Cheating"; -- Color Red
+local SecondTag = "Closeting"; -- Color Blue
+local ThirdTag = "Tryharding"; -- Color Orange
+local FourthTag = "Annoying"; -- Color Brown
+local FifthTag = "Friended"; -- Color Green
 
 -- TriggerKey, then this button is pressed it will print out all the names and priority's (Idea by @xarq0n and few others)
 local triggerKey = KEY_NUMLOCK
@@ -39,6 +47,7 @@ players[client.GetLocalPlayerIndex()] = nil
 local function printPlayerInfo( cmd )
     if ButtonReleased(triggerKey) then 
 
+        -- if body is marked it will tell you, you can turn this off by setting it to true
         local isSomeone = false;
 
         for i, player in pairs(players) do
@@ -49,24 +58,28 @@ local function printPlayerInfo( cmd )
                 local name = player:GetName();
                 local priority = playerlist.GetPriority(steamid);
 
-                if priority == CheatersPriority then
-                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07ff1100cheating!");
-                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is cheating!");
-                    client.Command( "say_party ".. name.." is cheating!", true); 
+                if priority == FirstPriority then
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07ff1100".. FirstTag.. "!");
+                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is".. FirstTag.. "!");
+                    client.Command( "say_party ".. name.." is ".. FirstTag.. "!", true); 
                     isSomeone = true;
-                elseif priority == TryhardPriority then
-                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is a \x07ff8800tryhard!");
-                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is a tryhard!");
-                    client.Command( "say_party ".. name.." is a tryhard!", true);
+                elseif priority == SecondPriority then
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x070000FF".. SecondTag.. "!");
+                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. SecondTag);
+                    client.Command( "say_party ".. name.." is ".. SecondTag.. "!", true);
                     isSomeone = true;
-                elseif priority == FriendsPriority then
-                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00friended!");
-                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is a friended!");
+                elseif priority == ThirdPriority then
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07ff8800".. ThirdTag.. "!");
+                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. ThirdTag);
+                    client.Command( "say_party ".. name.." is ".. ThirdTag.. "!", true);
                     isSomeone = true;
-                elseif priority == AnnoyingPriority then
-                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is an \x07694200annoying!");
-                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is annoying!");
-                    client.Command( "say_party ".. name.." is annoying!", true);
+                elseif priority == FourthPriority then
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07694200".. FourthTag.. "!");
+                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. FourthTag.. "!");
+                    client.Command( "say_party ".. name.." is ".. FourthTag.. "!", true);
+                elseif priority == FifthPriority then
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00".. FifthTag.. "!");
+                    print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. FifthTag);
                     isSomeone = true;
                 else
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is clean!");
