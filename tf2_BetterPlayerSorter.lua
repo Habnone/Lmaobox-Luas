@@ -33,7 +33,7 @@ end
 local players = entities.FindByClass("CTFPlayer")
 players[client.GetLocalPlayerIndex()] = nil 
 
-local function onCreateMove( cmd )
+local function printPlayerInfo( cmd )
     if ButtonReleased(triggerKey) then 
         for i, player in pairs(players) do
             if player ~= entities.GetLocalPlayer() then
@@ -55,7 +55,7 @@ local function onCreateMove( cmd )
                     client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00friended!");
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is a friended!");
                 elseif priority == AnnoyingPriority then
-                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is an \x07694200asshole!");
+                    client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is an \x07694200annoying!");
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is annoying!");
                     client.Command( "say_party ".. name.." is annoying!", true);
                 else
@@ -66,4 +66,4 @@ local function onCreateMove( cmd )
     end
 end
 
-callbacks.Register( "CreateMove", onCreateMove )
+callbacks.Register( "CreateMove", "printPlayer", printPlayerInfo )
