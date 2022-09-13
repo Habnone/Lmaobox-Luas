@@ -38,14 +38,14 @@ local function ButtonReleased(button) --
 end
 
 -- Intication that everything is working
-print("========== BETTER PLAYER SORTER V2.3 ========== \n By Dexter");
+print("========== BETTER PLAYER SORTER V2.5 ========== \n By Dexter");
 client.ChatPrintf("\x03[LmaoBox] \x01 Lua enabled! ");
-
-local players = entities.FindByClass("CTFPlayer")
-players[client.GetLocalPlayerIndex()] = nil 
 
 local function printPlayerInfo( cmd )
     if ButtonReleased(triggerKey) then 
+
+        local players = entities.FindByClass("CTFPlayer")
+        players[client.GetLocalPlayerIndex()] = nil 
 
         -- if body is marked it will tell you, you can turn this off by setting it to true
         local isSomeone = false;
@@ -77,6 +77,7 @@ local function printPlayerInfo( cmd )
                     client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07694200".. FourthTag.. "!");
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. FourthTag.. "!");
                     client.Command( "say_party ".. name.." is ".. FourthTag.. "!", true);
+                    isSomeone = true;
                 elseif priority == FifthPriority then
                     client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00".. FifthTag.. "!");
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. FifthTag);
