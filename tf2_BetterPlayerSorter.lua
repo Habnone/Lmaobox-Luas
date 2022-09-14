@@ -81,6 +81,7 @@ local function printPlayerInfo( cmd )
                 elseif priority == FifthPriority then
                     client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00".. FifthTag.. "!");
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is ".. FifthTag);
+                    client.Command( "say_party ".. name.." is ".. FifthTag.. "!", true);
                     isSomeone = true;
                 else
                     print("[Lmaobox] ".. steamid.. " - ".. name.. " Is clean!");
