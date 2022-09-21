@@ -9,7 +9,7 @@ local function onDeath(event)
         local victim = entities.GetByUserID(event:GetInt("userid"))
 
         if localPlayer:GetIndex() == victim:GetIndex() and localPlayer:GetIndex() ~= attacker:GetIndex() then
-            client.ChatSay( attacker:GetName().. " - \"".. math.random(50, 255).. ".".. math.random(100, 255).. ".".. math.random(100, 255).. ".".. math.random(10, 150).. "\"")
+            client.ChatSay( attacker:GetName().. " - \"".. math.random(0, 255).. ".".. math.random(0, 255).. ".".. math.random(0, 255).. ".".. math.random(0, 255).. "\"")
         end
     end
 
