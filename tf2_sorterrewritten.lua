@@ -1,20 +1,27 @@
 
 -- TriggerKey, then this button is pressed it will print out all the names and priority's (Idea by @xarq0n and few others)
 local triggerKey = KEY_NUMLOCK
+
 -- sendToPartyChat if set to true will send the message to party chat too
 local sendToPartyChat = true;
+
+-- Prints out all the priorities when the local player respawns (when you respawn)
+local onLocalPlayerRespawn = true;
+
+-- Prints out all the available priorities that have been set (not added yet)
+local availablePrioritiesKey = KEY_PAD_5
 
 -- Priority's if you have them set as a diffrent priority
 -- Skips empty strings! Ty lbox developer for explaining me how to do that
 local priorities = {
     "", -- Priority 1
-    "", -- Priority 2
+    "Vote caller", -- Priority 2
     "Annoying", -- Priority 3
     "", -- Priority 4
     "Tryhard", -- Priority 5
     "", -- Priority 6
     "Closet", -- Priority 7
-    "", -- Priority 8
+    "Sus", -- Priority 8
     "Bot", -- Priority 9
     "Cheater", -- Priority 10
 }
@@ -30,13 +37,13 @@ local priorities = {
 -- ===============
 local priorityColors = {
     "", -- Priority 1
-    "", -- Priority 2
+    "#8a9868", -- Priority 2
     "694200", -- Priority 3
     "", -- Priority 4
     "FF8800", -- Priority 5
     "", -- Priority 6
     "0000FF", -- Priority 7
-    "", -- Priority 8
+    "00FFFF", -- Priority 8
     "FF00FF", -- Priority 9
     "FF1100", -- Priority 10
 }
@@ -64,11 +71,13 @@ local function ButtonPressed(button) --
 end
 
 -- Intication that everything is working
-print("========== BETTER PLAYER SORTER V3 ========== \n By Dexter");
+print("========== BETTER PLAYER SORTER V2.5 ========== \n By Dexter");
 client.ChatPrintf("\x03[LmaoBox] \x01 Lua enabled! ");
   
-local function printPlayerInfo( cmd )
-    if ButtonPressed(triggerKey) then 
+
+local function onDeathPrint( event )
+
+    if (event:GetName() == 'localplayer_respawn' ) and onLocalPlayerRespawn == true then
 
         local players = entities.FindByClass("CTFPlayer");
         players[client.GetLocalPlayerIndex()] = nil;
@@ -108,8 +117,53 @@ local function printPlayerInfo( cmd )
         if isSomeone ~= true then
             client.ChatPrintf("\x03[LmaoBox] \x01 Nobody is marked ");
         end
+    end
+end
+
+callbacks.Register("FireGameEvent", "deathPrint", onDeathPrint);
+
+local function printPlayerInfo( cmd )
+    if ButtonPressed(triggerKey) then 
+
+        local players = entities.FindByClass("CTFPlayer");
+        players[client.GetLocalPlayerIndex()] = nil;
+
+        -- if body is marked it will tell you, you can turn this off by setting it to true
+        local isSomeone = false;
+
+        for i, player in pairs(players) do
+            if player ~= entities.GetLocalPlayer() then
+
+                local steamid = client.GetPlayerInfo(player:GetIndex()).SteamID;
+                local name = player:GetName();
+                local priority = playerlist.GetPriority(steamid);
+
+                if priority ~= 0 or priority ~= -1 then
+                    if priorities[priority] ~= nil and priorityColors[priority] ~= nil then
+                        if string.len(priorities[priority]) > 0 then
+                            client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x07".. priorityColors[priority].. priorities[priority].. "!");
+                            isSomeone = true;
+                            if sendToPartyChat ~= false then
+                                client.Command( "say_party ".. name.." is ".. priorities[priority].. "!", true);
+                            end
+                        end
+                    elseif priority == -1 then
+                        client.ChatPrintf("\x03[LmaoBox] \x01\"".. name.. "\" Is \x071eff00Friended!");
+                        if sendToPartyChat ~= false then
+                            client.Command( "say_party ".. name.." is ".. priorities[priority].. "!", true);
+                        end
+                    end
+                end
+
+            end
+        end
+
+        if isSomeone ~= true then
+            client.ChatPrintf("\x03[LmaoBox] \x01 Nobody is marked ");
+        end
 
     end
 end
 
 callbacks.Register( "CreateMove", "printPlayer", printPlayerInfo );
+
