@@ -15,3 +15,4 @@ Lmaobox Luas I have made
 - tf2_BetterPlayerSorter.lua (v2)
 - tf2_SorterReWritten.lua  (v3) - Allows you to sort players with the playerlist
 - SayIP.lua - Inchat says the player's name who killed you and a randomly generated IP
+- tf2_karma - Adds a karma system to tf2 [+2 karma on kill | +1 on assist | -5 on death]
