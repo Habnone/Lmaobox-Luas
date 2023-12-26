@@ -115,7 +115,6 @@ local function myCoolMessageHook(msg)
         if message ~= "TF_CHAT_ALL" and playerName ~= "Schizophrenia Gaming" then
             print(message)
             local rnd = math.random()
-            client.ChatPrintf( "\x06[\x07FF1122LmaoBox\x06] \x04".. rnd )
             if rnd > 0.5 then
                 client.ChatSay(string.lower(randomSentence))
             end
