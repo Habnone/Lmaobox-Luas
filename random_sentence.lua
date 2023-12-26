@@ -1,12 +1,6 @@
 -- Define a list of words
 local words = {"drunk", "men", "fucker","is", "are", "I", "them", "if", "then", "because", "that", "and", "or", "when", "where", "kill", "someone", "scout", "demoman", "pyro", "heavy", "sniper", "spy", "fucking", "fuck", "help", "attack", "defend", "point", "cap", "stop", "killing"}
 
-settings = {
-    afterKills = 3,
-    sayOnDeath = true
-}
-
-
 local killCount = 0
 
 local triggerKey = KEY_NUMLOCK
@@ -136,29 +130,3 @@ local function sendMessage( cmd , timer)
 end
 
 callbacks.Register( "CreateMove", "messagesend", sendMessage );
--- local function onDeathSay( event )
-
---     if (event:GetName() == 'player_death' ) then
-
---         local attacker = entities.GetByUserID(event:GetInt("attacker"))
---         local localPlayer = entities.GetLocalPlayer();
---         local victim = entities.GetByUserID(event:GetInt("userid"))
-
---         local randomSentence = generateRandomSentence(victim)
---         if localPlayer:GetIndex() == attacker:GetIndex() and localPlayer:GetIndex() ~= victim:GetIndex() then
---             killCount = killCount + 1
---             if killCount >= settings.afterKills then
---                 killCount = 0
---                 client.ChatSay(randomSentence)
---             else return end
---         end
-
---         if localPlayer:GetIndex() == victim:GetIndex() and localPlayer:GetIndex() ~= attacker:GetIndex() and settings.sayOnDeath == true then
---             client.ChatSay(randomSentence)
---         end
-        
-
---     end
--- end
-
--- callbacks.Register("FireGameEvent", "deathSay", onDeathSay);
